@@ -48,8 +48,6 @@
     var participant_id = jsPsych.randomization.randomID();
     // interval object for updating countdown timer on break screens
     var interval = null;
-    // number of total trials in expt, used to update progress bar by correct amount
-    var n_trials = Math.floor(en_targets.length / 3) + en_fillers.length
 
     // helper function for packaging trial variables, given sentence list and condition name
     function getDataForCondition(sentences, condition, list_id) {
@@ -84,11 +82,11 @@
 
     function buildSequence(a, groupSize) {
         var seq = [];
-        for (var i = 0; i < a.length; i += groupSize) {
 
-            var item_id = Math.floor(Math.random() * groupSize) + 1
+        for (var i = 0; i < a.length / groupSize; i++) {
 
-            while (a[i].Item != item_id) { i++ }
+            var start_index = i * groupSize;
+            var offset = Math.floor(Math.random() * groupSize)
 
             seq.push({
                 stimulus: makeGrid(a[i].Subject, a[i].PP1, a[i].PP2, a[i].Verb),
@@ -100,6 +98,7 @@
                 item_id: a[i].Item,
                 condition: a[i].Condition,
             });
+
         }
         return seq
     }
@@ -212,6 +211,8 @@
     // feed into buildSequence function, returns experimental sequence containing repeats
     var sentence_mem_timeline_vars = jsPsych.randomization.repeat(buildSequence(en_targets, 3).concat(buildSequence(en_fillers, 1)), 1);
     debug_print(sentence_mem_timeline_vars)
+
+    var n_trials = sentence_mem_timeline_vars.length
 
     // EXPERIMENTAL TIMELINE
     var timeline = [];

@@ -16,9 +16,9 @@ var en_fillers = [
         "Item":1,
         "Filler":"yes",
         "Repeat":null,
-        "math_question":"6 + 12 = ?",
-        "math_correct_answer":18,
-        "Group":27
+        "math_question":"7 + 10 = ?",
+        "math_correct_answer":17,
+        "Group":0
     },
     {
         "Subject":"The student",
@@ -37,9 +37,9 @@ var en_fillers = [
         "Item":1,
         "Filler":"yes",
         "Repeat":null,
-        "math_question":"5 + 14 = ?",
-        "math_correct_answer":19,
-        "Group":28
+        "math_question":"6 + 14 = ?",
+        "math_correct_answer":20,
+        "Group":1
     },
     {
         "Subject":"The athlete",
@@ -58,9 +58,9 @@ var en_fillers = [
         "Item":1,
         "Filler":"yes",
         "Repeat":"yes",
-        "math_question":"5 + 6 = ?",
-        "math_correct_answer":11,
-        "Group":63
+        "math_question":"10 + 13 = ?",
+        "math_correct_answer":23,
+        "Group":2
     },
     {
         "Subject":"The astronomer",
@@ -79,9 +79,9 @@ var en_fillers = [
         "Item":1,
         "Filler":"yes",
         "Repeat":"yes",
-        "math_question":"14 + 6 = ?",
-        "math_correct_answer":20,
-        "Group":64
+        "math_question":"5 + 8 = ?",
+        "math_correct_answer":13,
+        "Group":3
     },
     {
         "Subject":"The bus driver",
@@ -100,8 +100,8 @@ var en_fillers = [
         "Item":1,
         "Filler":"yes",
         "Repeat":"yes",
-        "math_question":"5 + 9 = ?",
-        "math_correct_answer":14,
-        "Group":65
+        "math_question":"13 + 5 = ?",
+        "math_correct_answer":18,
+        "Group":4
     }
 ]

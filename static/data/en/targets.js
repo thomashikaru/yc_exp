@@ -17,8 +17,8 @@ var en_targets = [
         "Item":1,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"14 + 14 = ?",
-        "math_correct_answer":28
+        "math_question":"14 + 15 = ?",
+        "math_correct_answer":29
     },
     {
         "Subject":"The salesman",
@@ -38,8 +38,8 @@ var en_targets = [
         "Item":2,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"13 + 14 = ?",
-        "math_correct_answer":27
+        "math_question":"5 + 13 = ?",
+        "math_correct_answer":18
     },
     {
         "Subject":"The salesman",
@@ -59,8 +59,8 @@ var en_targets = [
         "Item":3,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"10 + 13 = ?",
-        "math_correct_answer":23
+        "math_question":"10 + 10 = ?",
+        "math_correct_answer":20
     },
     {
         "Subject":"The CEO",
@@ -80,8 +80,8 @@ var en_targets = [
         "Item":1,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"8 + 14 = ?",
-        "math_correct_answer":22
+        "math_question":"13 + 6 = ?",
+        "math_correct_answer":19
     },
     {
         "Subject":"The CEO",
@@ -101,8 +101,8 @@ var en_targets = [
         "Item":2,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"5 + 14 = ?",
-        "math_correct_answer":19
+        "math_question":"8 + 8 = ?",
+        "math_correct_answer":16
     },
     {
         "Subject":"The CEO",
@@ -122,8 +122,8 @@ var en_targets = [
         "Item":3,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"10 + 9 = ?",
-        "math_correct_answer":19
+        "math_question":"15 + 10 = ?",
+        "math_correct_answer":25
     },
     {
         "Subject":"The mother",
@@ -143,8 +143,8 @@ var en_targets = [
         "Item":1,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"8 + 9 = ?",
-        "math_correct_answer":17
+        "math_question":"6 + 15 = ?",
+        "math_correct_answer":21
     },
     {
         "Subject":"The mother",
@@ -164,8 +164,8 @@ var en_targets = [
         "Item":2,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"6 + 8 = ?",
-        "math_correct_answer":14
+        "math_question":"14 + 12 = ?",
+        "math_correct_answer":26
     },
     {
         "Subject":"The mother",
@@ -185,8 +185,8 @@ var en_targets = [
         "Item":3,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"13 + 15 = ?",
-        "math_correct_answer":28
+        "math_question":"10 + 9 = ?",
+        "math_correct_answer":19
     },
     {
         "Subject":"The businessman",
@@ -206,8 +206,8 @@ var en_targets = [
         "Item":1,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"11 + 6 = ?",
-        "math_correct_answer":17
+        "math_question":"13 + 7 = ?",
+        "math_correct_answer":20
     },
     {
         "Subject":"The businessman",
@@ -227,8 +227,8 @@ var en_targets = [
         "Item":2,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"8 + 15 = ?",
-        "math_correct_answer":23
+        "math_question":"6 + 14 = ?",
+        "math_correct_answer":20
     },
     {
         "Subject":"The businessman",
@@ -248,8 +248,8 @@ var en_targets = [
         "Item":3,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"13 + 10 = ?",
-        "math_correct_answer":23
+        "math_question":"7 + 10 = ?",
+        "math_correct_answer":17
     },
     {
         "Subject":"The actress",
@@ -269,8 +269,8 @@ var en_targets = [
         "Item":1,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"8 + 5 = ?",
-        "math_correct_answer":13
+        "math_question":"8 + 7 = ?",
+        "math_correct_answer":15
     },
     {
         "Subject":"The actress",
@@ -290,8 +290,8 @@ var en_targets = [
         "Item":2,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"14 + 12 = ?",
-        "math_correct_answer":26
+        "math_question":"14 + 9 = ?",
+        "math_correct_answer":23
     },
     {
         "Subject":"The actress",
@@ -311,8 +311,8 @@ var en_targets = [
         "Item":3,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"10 + 7 = ?",
-        "math_correct_answer":17
+        "math_question":"10 + 9 = ?",
+        "math_correct_answer":19
     },
     {
         "Subject":"The girl",
@@ -332,8 +332,8 @@ var en_targets = [
         "Item":1,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"14 + 15 = ?",
-        "math_correct_answer":29
+        "math_question":"10 + 6 = ?",
+        "math_correct_answer":16
     },
     {
         "Subject":"The girl",
@@ -353,8 +353,8 @@ var en_targets = [
         "Item":2,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"8 + 12 = ?",
-        "math_correct_answer":20
+        "math_question":"13 + 13 = ?",
+        "math_correct_answer":26
     },
     {
         "Subject":"The girl",
@@ -374,8 +374,8 @@ var en_targets = [
         "Item":3,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"8 + 12 = ?",
-        "math_correct_answer":20
+        "math_question":"6 + 8 = ?",
+        "math_correct_answer":14
     },
     {
         "Subject":"The waiter",
@@ -395,8 +395,8 @@ var en_targets = [
         "Item":1,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"11 + 10 = ?",
-        "math_correct_answer":21
+        "math_question":"11 + 15 = ?",
+        "math_correct_answer":26
     },
     {
         "Subject":"The waiter",
@@ -416,8 +416,8 @@ var en_targets = [
         "Item":2,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"6 + 13 = ?",
-        "math_correct_answer":19
+        "math_question":"15 + 7 = ?",
+        "math_correct_answer":22
     },
     {
         "Subject":"The waiter",
@@ -437,8 +437,8 @@ var en_targets = [
         "Item":3,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"10 + 9 = ?",
-        "math_correct_answer":19
+        "math_question":"11 + 7 = ?",
+        "math_correct_answer":18
     },
     {
         "Subject":"The client",
@@ -458,8 +458,8 @@ var en_targets = [
         "Item":1,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"14 + 14 = ?",
-        "math_correct_answer":28
+        "math_question":"7 + 8 = ?",
+        "math_correct_answer":15
     },
     {
         "Subject":"The client",
@@ -479,8 +479,8 @@ var en_targets = [
         "Item":2,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"13 + 8 = ?",
-        "math_correct_answer":21
+        "math_question":"9 + 8 = ?",
+        "math_correct_answer":17
     },
     {
         "Subject":"The client",
@@ -500,8 +500,8 @@ var en_targets = [
         "Item":3,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"14 + 8 = ?",
-        "math_correct_answer":22
+        "math_question":"9 + 5 = ?",
+        "math_correct_answer":14
     },
     {
         "Subject":"The actress",
@@ -521,7 +521,7 @@ var en_targets = [
         "Item":1,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"13 + 10 = ?",
+        "math_question":"15 + 8 = ?",
         "math_correct_answer":23
     },
     {
@@ -542,8 +542,8 @@ var en_targets = [
         "Item":2,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"9 + 15 = ?",
-        "math_correct_answer":24
+        "math_question":"13 + 9 = ?",
+        "math_correct_answer":22
     },
     {
         "Subject":"The actress",
@@ -563,7 +563,7 @@ var en_targets = [
         "Item":3,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"7 + 7 = ?",
+        "math_question":"5 + 9 = ?",
         "math_correct_answer":14
     },
     {
@@ -584,8 +584,8 @@ var en_targets = [
         "Item":1,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"7 + 14 = ?",
-        "math_correct_answer":21
+        "math_question":"7 + 6 = ?",
+        "math_correct_answer":13
     },
     {
         "Subject":"The student",
@@ -605,8 +605,8 @@ var en_targets = [
         "Item":2,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"14 + 6 = ?",
-        "math_correct_answer":20
+        "math_question":"13 + 15 = ?",
+        "math_correct_answer":28
     },
     {
         "Subject":"The student",
@@ -626,8 +626,8 @@ var en_targets = [
         "Item":3,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"6 + 14 = ?",
-        "math_correct_answer":20
+        "math_question":"6 + 8 = ?",
+        "math_correct_answer":14
     },
     {
         "Subject":"The girl",
@@ -647,8 +647,8 @@ var en_targets = [
         "Item":1,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"6 + 11 = ?",
-        "math_correct_answer":17
+        "math_question":"7 + 12 = ?",
+        "math_correct_answer":19
     },
     {
         "Subject":"The girl",
@@ -668,8 +668,8 @@ var en_targets = [
         "Item":2,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"9 + 5 = ?",
-        "math_correct_answer":14
+        "math_question":"6 + 9 = ?",
+        "math_correct_answer":15
     },
     {
         "Subject":"The girl",
@@ -689,8 +689,8 @@ var en_targets = [
         "Item":3,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"15 + 15 = ?",
-        "math_correct_answer":30
+        "math_question":"14 + 9 = ?",
+        "math_correct_answer":23
     },
     {
         "Subject":"The lady",
@@ -710,8 +710,8 @@ var en_targets = [
         "Item":1,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"7 + 13 = ?",
-        "math_correct_answer":20
+        "math_question":"11 + 6 = ?",
+        "math_correct_answer":17
     },
     {
         "Subject":"The lady",
@@ -731,8 +731,8 @@ var en_targets = [
         "Item":2,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"5 + 8 = ?",
-        "math_correct_answer":13
+        "math_question":"14 + 7 = ?",
+        "math_correct_answer":21
     },
     {
         "Subject":"The lady",
@@ -752,7 +752,7 @@ var en_targets = [
         "Item":3,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"6 + 8 = ?",
+        "math_question":"8 + 6 = ?",
         "math_correct_answer":14
     },
     {
@@ -773,8 +773,8 @@ var en_targets = [
         "Item":1,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"11 + 13 = ?",
-        "math_correct_answer":24
+        "math_question":"14 + 7 = ?",
+        "math_correct_answer":21
     },
     {
         "Subject":"The child",
@@ -794,7 +794,7 @@ var en_targets = [
         "Item":2,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"9 + 5 = ?",
+        "math_question":"6 + 8 = ?",
         "math_correct_answer":14
     },
     {
@@ -815,8 +815,8 @@ var en_targets = [
         "Item":3,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"11 + 13 = ?",
-        "math_correct_answer":24
+        "math_question":"6 + 5 = ?",
+        "math_correct_answer":11
     },
     {
         "Subject":"The robber",
@@ -836,8 +836,8 @@ var en_targets = [
         "Item":1,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"5 + 6 = ?",
-        "math_correct_answer":11
+        "math_question":"9 + 5 = ?",
+        "math_correct_answer":14
     },
     {
         "Subject":"The robber",
@@ -857,8 +857,8 @@ var en_targets = [
         "Item":2,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"8 + 6 = ?",
-        "math_correct_answer":14
+        "math_question":"7 + 5 = ?",
+        "math_correct_answer":12
     },
     {
         "Subject":"The robber",
@@ -878,8 +878,8 @@ var en_targets = [
         "Item":3,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"14 + 5 = ?",
-        "math_correct_answer":19
+        "math_question":"5 + 12 = ?",
+        "math_correct_answer":17
     },
     {
         "Subject":"The barista",
@@ -899,7 +899,7 @@ var en_targets = [
         "Item":1,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"15 + 10 = ?",
+        "math_question":"12 + 13 = ?",
         "math_correct_answer":25
     },
     {
@@ -920,8 +920,8 @@ var en_targets = [
         "Item":2,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"14 + 6 = ?",
-        "math_correct_answer":20
+        "math_question":"10 + 13 = ?",
+        "math_correct_answer":23
     },
     {
         "Subject":"The barista",
@@ -941,7 +941,7 @@ var en_targets = [
         "Item":3,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"15 + 12 = ?",
+        "math_question":"13 + 14 = ?",
         "math_correct_answer":27
     },
     {
@@ -962,8 +962,8 @@ var en_targets = [
         "Item":1,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"9 + 8 = ?",
-        "math_correct_answer":17
+        "math_question":"10 + 6 = ?",
+        "math_correct_answer":16
     },
     {
         "Subject":"The tourist",
@@ -983,8 +983,8 @@ var en_targets = [
         "Item":2,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"5 + 10 = ?",
-        "math_correct_answer":15
+        "math_question":"11 + 15 = ?",
+        "math_correct_answer":26
     },
     {
         "Subject":"The tourist",
@@ -1004,8 +1004,8 @@ var en_targets = [
         "Item":3,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"14 + 9 = ?",
-        "math_correct_answer":23
+        "math_question":"9 + 8 = ?",
+        "math_correct_answer":17
     },
     {
         "Subject":"The dad",
@@ -1025,8 +1025,8 @@ var en_targets = [
         "Item":1,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"11 + 5 = ?",
-        "math_correct_answer":16
+        "math_question":"5 + 9 = ?",
+        "math_correct_answer":14
     },
     {
         "Subject":"The dad",
@@ -1046,8 +1046,8 @@ var en_targets = [
         "Item":2,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"11 + 7 = ?",
-        "math_correct_answer":18
+        "math_question":"5 + 14 = ?",
+        "math_correct_answer":19
     },
     {
         "Subject":"The dad",
@@ -1067,8 +1067,8 @@ var en_targets = [
         "Item":3,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"5 + 8 = ?",
-        "math_correct_answer":13
+        "math_question":"7 + 12 = ?",
+        "math_correct_answer":19
     },
     {
         "Subject":"The student",
@@ -1088,8 +1088,8 @@ var en_targets = [
         "Item":1,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"11 + 5 = ?",
-        "math_correct_answer":16
+        "math_question":"8 + 5 = ?",
+        "math_correct_answer":13
     },
     {
         "Subject":"The student",
@@ -1109,8 +1109,8 @@ var en_targets = [
         "Item":2,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"13 + 11 = ?",
-        "math_correct_answer":24
+        "math_question":"5 + 7 = ?",
+        "math_correct_answer":12
     },
     {
         "Subject":"The student",
@@ -1130,8 +1130,8 @@ var en_targets = [
         "Item":3,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"7 + 10 = ?",
-        "math_correct_answer":17
+        "math_question":"9 + 13 = ?",
+        "math_correct_answer":22
     },
     {
         "Subject":"The robber",
@@ -1151,8 +1151,8 @@ var en_targets = [
         "Item":1,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"14 + 6 = ?",
-        "math_correct_answer":20
+        "math_question":"6 + 13 = ?",
+        "math_correct_answer":19
     },
     {
         "Subject":"The robber",
@@ -1172,8 +1172,8 @@ var en_targets = [
         "Item":2,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"7 + 8 = ?",
-        "math_correct_answer":15
+        "math_question":"8 + 12 = ?",
+        "math_correct_answer":20
     },
     {
         "Subject":"The robber",
@@ -1193,8 +1193,8 @@ var en_targets = [
         "Item":3,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"8 + 9 = ?",
-        "math_correct_answer":17
+        "math_question":"8 + 13 = ?",
+        "math_correct_answer":21
     },
     {
         "Subject":"The boy",
@@ -1214,8 +1214,8 @@ var en_targets = [
         "Item":1,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"9 + 7 = ?",
-        "math_correct_answer":16
+        "math_question":"8 + 10 = ?",
+        "math_correct_answer":18
     },
     {
         "Subject":"The boy",
@@ -1235,8 +1235,8 @@ var en_targets = [
         "Item":2,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"14 + 5 = ?",
-        "math_correct_answer":19
+        "math_question":"10 + 14 = ?",
+        "math_correct_answer":24
     },
     {
         "Subject":"The boy",
@@ -1256,8 +1256,8 @@ var en_targets = [
         "Item":3,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"6 + 6 = ?",
-        "math_correct_answer":12
+        "math_question":"7 + 6 = ?",
+        "math_correct_answer":13
     },
     {
         "Subject":"The attorney",
@@ -1277,8 +1277,8 @@ var en_targets = [
         "Item":1,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"6 + 13 = ?",
-        "math_correct_answer":19
+        "math_question":"9 + 6 = ?",
+        "math_correct_answer":15
     },
     {
         "Subject":"The attorney",
@@ -1298,8 +1298,8 @@ var en_targets = [
         "Item":2,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"9 + 7 = ?",
-        "math_correct_answer":16
+        "math_question":"11 + 12 = ?",
+        "math_correct_answer":23
     },
     {
         "Subject":"The attorney",
@@ -1319,8 +1319,8 @@ var en_targets = [
         "Item":3,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"5 + 7 = ?",
-        "math_correct_answer":12
+        "math_question":"6 + 8 = ?",
+        "math_correct_answer":14
     },
     {
         "Subject":"The performer",
@@ -1340,7 +1340,7 @@ var en_targets = [
         "Item":1,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"13 + 7 = ?",
+        "math_question":"10 + 10 = ?",
         "math_correct_answer":20
     },
     {
@@ -1361,8 +1361,8 @@ var en_targets = [
         "Item":2,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"11 + 5 = ?",
-        "math_correct_answer":16
+        "math_question":"9 + 13 = ?",
+        "math_correct_answer":22
     },
     {
         "Subject":"The performer",
@@ -1382,8 +1382,8 @@ var en_targets = [
         "Item":3,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"9 + 13 = ?",
-        "math_correct_answer":22
+        "math_question":"15 + 9 = ?",
+        "math_correct_answer":24
     },
     {
         "Subject":"The chef",
@@ -1403,8 +1403,8 @@ var en_targets = [
         "Item":1,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"6 + 14 = ?",
-        "math_correct_answer":20
+        "math_question":"7 + 7 = ?",
+        "math_correct_answer":14
     },
     {
         "Subject":"The chef",
@@ -1424,8 +1424,8 @@ var en_targets = [
         "Item":2,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"6 + 7 = ?",
-        "math_correct_answer":13
+        "math_question":"15 + 7 = ?",
+        "math_correct_answer":22
     },
     {
         "Subject":"The chef",
@@ -1445,8 +1445,8 @@ var en_targets = [
         "Item":3,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"11 + 13 = ?",
-        "math_correct_answer":24
+        "math_question":"11 + 14 = ?",
+        "math_correct_answer":25
     },
     {
         "Subject":"The couple",
@@ -1466,8 +1466,8 @@ var en_targets = [
         "Item":1,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"6 + 8 = ?",
-        "math_correct_answer":14
+        "math_question":"10 + 12 = ?",
+        "math_correct_answer":22
     },
     {
         "Subject":"The couple",
@@ -1487,8 +1487,8 @@ var en_targets = [
         "Item":2,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"6 + 6 = ?",
-        "math_correct_answer":12
+        "math_question":"6 + 7 = ?",
+        "math_correct_answer":13
     },
     {
         "Subject":"The couple",
@@ -1508,7 +1508,7 @@ var en_targets = [
         "Item":3,
         "Filler":"no",
         "Repeat":null,
-        "math_question":"6 + 6 = ?",
-        "math_correct_answer":12
+        "math_question":"9 + 11 = ?",
+        "math_correct_answer":20
     }
 ]
