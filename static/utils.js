@@ -2,8 +2,8 @@
 // change the following prior to real experiment: trials_per_block, debug_mode, completion_code
 const use_flask = false;
 const trials_per_block = 85; // 85;
-const stimulus_duration = 7000;
-const post_stimulus_delay = 1500;
+const stimulus_duration = 100; // 7000
+const post_stimulus_delay = 0; // 1500
 const fixation_duration = 500;
 const completion_code = "00000000";
 const n_back_base = 20;
