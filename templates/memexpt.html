@@ -92,14 +92,17 @@
             var offset = Math.floor(Math.random() * groupSize)
 
             seq.push({
-                stimulus: makeGrid(a[i].Subject, a[i].PP1, a[i].PP2, a[i].Verb),
-                stimulus2: makeGrid("", a[i].Verb, "", ""),
-                stimulus_raw: a[i].Subject + " " + a[i].Verb + " " + a[i].PP2 + " " + a[i].PP2,
+                subject: a[i].Subject,
+                verb: a[i].Verb,
+                pp1: a[i].PP1,
+                pp2: a[i].PP2,
                 math_question: makeMathQ(a[i].math_question),
                 math_correct_answer: a[i].math_correct_answer,
                 group_name: a[i].Group,
                 item_id: a[i].Item,
                 condition: a[i].Condition,
+                stimulus_display: makeGrid(a[i].Subject, a[i].PP1, a[i].PP2, a[i].Verb),
+                stimulus2_display: makeGrid("", a[i].Verb, "", ""),
             });
 
         }
@@ -214,6 +217,7 @@
     // feed into buildSequence function, returns experimental sequence containing repeats
     var sentence_mem_timeline_vars = jsPsych.randomization.repeat(buildSequence(en_targets, 3).concat(buildSequence(en_fillers, 1)), 1);
     debug_print(sentence_mem_timeline_vars)
+    debug_print(sentence_mem_timeline_vars[0].subject)
 
     var n_trials = sentence_mem_timeline_vars.length
 
@@ -426,18 +430,21 @@
             // break_conditional, // optional break trial
             { // show sentence parts
                 type: jsPsychHtmlKeyboardResponse,
-                stimulus: jsPsych.timelineVariable('stimulus'),
+                stimulus: jsPsych.timelineVariable("stimulus_display"),
                 choices: [' ', 'Spacebar'],
                 trial_duration: stimulus_duration,
                 post_trial_gap: post_stimulus_delay,
                 response_ends_trial: false,
                 data: {
                     condition: jsPsych.timelineVariable('condition'),
-                    stimulus_raw: jsPsych.timelineVariable('stimulus_raw'),
                     math_question: jsPsych.timelineVariable('math_question'),
                     math_correct_answer: jsPsych.timelineVariable('math_correct_answer'),
                     item_id: jsPsych.timelineVariable('item_id'),
                     group_name: jsPsych.timelineVariable('group_name'),
+                    subject: jsPsych.timelineVariable("subject"),
+                    verb: jsPsych.timelineVariable("verb"),
+                    pp1: jsPsych.timelineVariable("pp1"),
+                    pp2: jsPsych.timelineVariable("pp2"),
                 },
                 on_finish: function (data) {
                     var curr_progress_bar_value = jsPsych.getProgressBarCompleted();
@@ -457,11 +464,14 @@
                 ],
                 data: {
                     condition: jsPsych.timelineVariable('condition'),
-                    stimulus_raw: jsPsych.timelineVariable('stimulus_raw'),
                     math_question: jsPsych.timelineVariable('math_question'),
                     math_correct_answer: jsPsych.timelineVariable('math_correct_answer'),
                     item_id: jsPsych.timelineVariable('item_id'),
                     group_name: jsPsych.timelineVariable('group_name'),
+                    subject: jsPsych.timelineVariable("subject"),
+                    verb: jsPsych.timelineVariable("verb"),
+                    pp1: jsPsych.timelineVariable("pp1"),
+                    pp2: jsPsych.timelineVariable("pp2"),
                 },
                 on_finish: function (data) {
                     var curr_progress_bar_value = jsPsych.getProgressBarCompleted();
@@ -470,7 +480,7 @@
             },
             { // build a sentence
                 type: jsPsychSurveyText,
-                preamble: jsPsych.timelineVariable('stimulus2'),
+                preamble: jsPsych.timelineVariable("stimulus2_display"),
                 questions: [
                     {
                         name: 'produced_sentence',
@@ -481,11 +491,14 @@
                 ],
                 data: {
                     condition: jsPsych.timelineVariable('condition'),
-                    stimulus_raw: jsPsych.timelineVariable('stimulus_raw'),
                     math_question: jsPsych.timelineVariable('math_question'),
                     math_correct_answer: jsPsych.timelineVariable('math_correct_answer'),
                     item_id: jsPsych.timelineVariable('item_id'),
                     group_name: jsPsych.timelineVariable('group_name'),
+                    subject: jsPsych.timelineVariable("subject"),
+                    verb: jsPsych.timelineVariable("verb"),
+                    pp1: jsPsych.timelineVariable("pp1"),
+                    pp2: jsPsych.timelineVariable("pp2"),
                 },
                 on_finish: function (data) {
                     var curr_progress_bar_value = jsPsych.getProgressBarCompleted();
