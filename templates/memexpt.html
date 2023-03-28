@@ -37,6 +37,9 @@
     var jsPsych = initJsPsych({
         show_progress_bar: true,
         auto_update_progress_bar: false,
+        on_close: function () {
+            saveData(participant_id, jsPsych.data.get().json());
+        },
         on_finish: function () {
             console.log("Experiment Completed.");
         },
@@ -436,7 +439,7 @@
                     item_id: jsPsych.timelineVariable('item_id'),
                     group_name: jsPsych.timelineVariable('group_name'),
                 },
-                on_finish: function () {
+                on_finish: function (data) {
                     var curr_progress_bar_value = jsPsych.getProgressBarCompleted();
                     jsPsych.setProgressBar(curr_progress_bar_value + (1.0 / (3 * n_trials)));
                 }
@@ -460,7 +463,7 @@
                     item_id: jsPsych.timelineVariable('item_id'),
                     group_name: jsPsych.timelineVariable('group_name'),
                 },
-                on_finish: function () {
+                on_finish: function (data) {
                     var curr_progress_bar_value = jsPsych.getProgressBarCompleted();
                     jsPsych.setProgressBar(curr_progress_bar_value + (1.0 / (3 * n_trials)));
                 }
@@ -484,7 +487,7 @@
                     item_id: jsPsych.timelineVariable('item_id'),
                     group_name: jsPsych.timelineVariable('group_name'),
                 },
-                on_finish: function () {
+                on_finish: function (data) {
                     var curr_progress_bar_value = jsPsych.getProgressBarCompleted();
                     jsPsych.setProgressBar(curr_progress_bar_value + (1.0 / (3 * n_trials)));
                 }
