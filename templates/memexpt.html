@@ -38,7 +38,7 @@
         show_progress_bar: true,
         auto_update_progress_bar: false,
         on_close: function () {
-            saveData(participant_id, jsPsych.data.get().json());
+            saveData(participant_id, jsPsych.data.get().csv());
         },
         on_finish: function () {
             console.log("Experiment Completed.");
@@ -383,7 +383,7 @@
         choices: [" ", "Spacebar"],
         trial_duration: break_max_len * 1000,
         on_load: function () {
-            saveData(participant_id, jsPsych.data.get().json());
+            saveData(participant_id, jsPsych.data.get().csv());
             var wait_time = break_max_len * 1000; // in milliseconds
             var start_time = performance.now();
             interval = setInterval(function () {
@@ -502,7 +502,7 @@
         type: jsPsychCallFunction,
         func: function () {
             jsPsych.setProgressBar(1.0);
-            saveData(participant_id, jsPsych.data.get().json());
+            saveData(participant_id, jsPsych.data.get().csv());
         }
     }
     timeline.push(save_screen);
