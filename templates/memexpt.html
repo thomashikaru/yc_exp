@@ -96,7 +96,8 @@
                 verb: a[i].Verb,
                 pp1: a[i].PP1,
                 pp2: a[i].PP2,
-                math_question: makeMathQ(a[i].math_question),
+                math_question: a[i].math_question,
+                math_question_display: makeMathQ(a[i].math_question),
                 math_correct_answer: a[i].math_correct_answer,
                 group_name: a[i].Group,
                 item_id: a[i].Item,
@@ -456,7 +457,7 @@
             },
             { // distractor math question
                 type: jsPsychSurveyText,
-                preamble: jsPsych.timelineVariable('math_question'),
+                preamble: jsPsych.timelineVariable('math_question_display'),
                 questions: [
                     {
                         name: 'math_answer',
