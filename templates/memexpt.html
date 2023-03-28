@@ -449,6 +449,9 @@
                 on_finish: function (data) {
                     var curr_progress_bar_value = jsPsych.getProgressBarCompleted();
                     jsPsych.setProgressBar(curr_progress_bar_value + (1.0 / (3 * n_trials)));
+                },
+                save_trial_parameters: {
+                    stimulus: false
                 }
             },
             { // distractor math question
@@ -476,6 +479,9 @@
                 on_finish: function (data) {
                     var curr_progress_bar_value = jsPsych.getProgressBarCompleted();
                     jsPsych.setProgressBar(curr_progress_bar_value + (1.0 / (3 * n_trials)));
+                },
+                save_trial_parameters: {
+                    stimulus: false
                 }
             },
             { // build a sentence
@@ -503,6 +509,9 @@
                 on_finish: function (data) {
                     var curr_progress_bar_value = jsPsych.getProgressBarCompleted();
                     jsPsych.setProgressBar(curr_progress_bar_value + (1.0 / (3 * n_trials)));
+                },
+                save_trial_parameters: {
+                    stimulus: false
                 }
             }
         ],
