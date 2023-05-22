@@ -86,27 +86,71 @@
     function buildSequence(a, groupSize) {
         var seq = [];
 
-        for (var i = 0; i < a.length / groupSize; i++) {
+        // create a lookup of how much allowance of each condition is available
+        var d = {
+            "short_short": {
+                "transitive": { "none": 4 },
+                "intransitive": { "none": 4 },
+            },
+            "short_long": {
+                "transitive": { "prenominal": 2, "postnominal": 2 },
+                "intransitive": { "prenominal": 2, "postnominal": 2 },
+            },
+            "long_short": {
+                "transitive": { "prenominal": 2, "postnominal": 2 },
+                "intransitive": { "prenominal": 2, "postnominal": 2 },
+            },
+            undefined: { undefined: { "filler": 0 } }
+        }
 
-            var start_index = i * groupSize;
-            var offset = Math.floor(Math.random() * groupSize)
+        // debug_print(a)
+
+        for (var j = 0; j < a.length / groupSize; j++) {
+
+            var start_index = j * groupSize;
+
+            // enter the group, then advance until the correct condition is found
+            var offset = 0;
+            var i = start_index;
+            if (!a[0].Filler) {
+                while (d[a[start_index + offset].Condition][a[start_index + offset].Transitivity][a[start_index + offset].ModifierPosition] <= 0) {
+                    offset++;
+                }
+                i += offset;
+                d[a[i].Condition][a[i].Transitivity][a[i].ModifierPosition]--;
+            }
+
+            var grid = null;
+            var grid_inputs = [a[i].Subject, a[i].PP1, a[i].PP2, a[i].Verb];
+
+            if (a[i].Filler) {
+                grid_inputs = jsPsych.randomization.repeat(grid_inputs, 1)
+            }
+            grid = makeGrid(...grid_inputs)
 
             seq.push({
                 subject: a[i].Subject,
                 verb: a[i].Verb,
                 pp1: a[i].PP1,
                 pp2: a[i].PP2,
+                repeat: false,
+                filler: a[i].Filler,
                 math_question: a[i].math_question,
                 math_question_display: makeMathQ(a[i].math_question),
                 math_correct_answer: a[i].math_correct_answer,
                 group_name: a[i].Group,
                 item_id: a[i].Item,
                 condition: a[i].Condition,
-                stimulus_display: makeGrid(a[i].Subject, a[i].PP1, a[i].PP2, a[i].Verb),
-                stimulus2_display: makeGrid("", a[i].Verb, "", ""),
+                modifier_position: a[i].ModifierPosition,
+                transitivity: a[i].Transitivity,
+                stimulus_display: grid,
+                stimulus2_display: makeCueEn(a[i].Verb),
             });
 
         }
+
+        // debug_print(d)
+
         return seq
     }
 
@@ -215,10 +259,25 @@
     // create randomized list of target stimuli
     var targets = [];
 
-    // feed into buildSequence function, returns experimental sequence containing repeats
+    // feed into buildSequence function, returns experimental sequence
     var sentence_mem_timeline_vars = jsPsych.randomization.repeat(buildSequence(en_targets, 3).concat(buildSequence(en_fillers, 1)), 1);
+
+    // add repeats
+    for (var i = 0; i < sentence_mem_timeline_vars.length; i++) {
+        if (Math.random() < vigilance_frequency && sentence_mem_timeline_vars[i].filler) {
+            var back = i - (Math.floor(Math.random() * (vigilance_repeat_back_range[1] - vigilance_repeat_back_range[0])) + vigilance_repeat_back_range[0]);
+            if (back >= 0 && sentence_mem_timeline_vars[back].filler && sentence_mem_timeline_vars[back].repeat == false) {
+                sentence_mem_timeline_vars[i] = { ...sentence_mem_timeline_vars[back] };
+                sentence_mem_timeline_vars[i].repeat = true;
+                // debug_print(sentence_mem_timeline_vars[i])
+            }
+        }
+    }
+
     debug_print(sentence_mem_timeline_vars)
-    debug_print(sentence_mem_timeline_vars[0].subject)
+
+    // sanity check: print stats of experimental sequence
+    debug_print(get_stats(sentence_mem_timeline_vars))
 
     var n_trials = sentence_mem_timeline_vars.length
 
@@ -432,10 +491,11 @@
             { // show sentence parts
                 type: jsPsychHtmlKeyboardResponse,
                 stimulus: jsPsych.timelineVariable("stimulus_display"),
-                choices: [' ', 'Spacebar'],
+                prompt: "Press SPACE if this sentence has appeared before.",
+                choices: [' '],
                 trial_duration: stimulus_duration,
-                post_trial_gap: post_stimulus_delay,
-                response_ends_trial: false,
+                post_trial_gap: 0,
+                response_ends_trial: true,
                 data: {
                     condition: jsPsych.timelineVariable('condition'),
                     math_question: jsPsych.timelineVariable('math_question'),
@@ -446,26 +506,53 @@
                     verb: jsPsych.timelineVariable("verb"),
                     pp1: jsPsych.timelineVariable("pp1"),
                     pp2: jsPsych.timelineVariable("pp2"),
+                    repeat: jsPsych.timelineVariable("repeat"),
                 },
                 on_finish: function (data) {
                     var curr_progress_bar_value = jsPsych.getProgressBarCompleted();
-                    jsPsych.setProgressBar(curr_progress_bar_value + (1.0 / (3 * n_trials)));
+                    jsPsych.setProgressBar(curr_progress_bar_value + (1.0 / (4 * n_trials)));
+                    if (jsPsych.pluginAPI.compareKeys(data.response, " ") && data.repeat) {
+                        data.correct = true;
+                    } else if (data.response == null && data.repeat == false) {
+                        data.correct = true;
+                    } else {
+                        data.correct = false;
+                    }
                 },
                 save_trial_parameters: {
                     stimulus: false
                 }
+            },
+            { // fixation (plus feedback on memory repeat response)
+                type: jsPsychHtmlKeyboardResponse,
+                stimulus: function () {
+                    var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+                    if (last_trial_correct) {
+                        return format_green("Correct"); // the parameter value has to be returned from the function
+                    } else {
+                        return format_red("Wrong"); // the parameter value has to be returned from the function
+                    }
+                },
+                choices: "NO_KEYS",
+                on_finish: function (data) {
+                    var curr_progress_bar_value = jsPsych.getProgressBarCompleted();
+                    jsPsych.setProgressBar(curr_progress_bar_value + (1.0 / (4 * n_trials)));
+                },
+                trial_duration: post_stimulus_delay,
             },
             { // distractor math question
                 type: jsPsychSurveyText,
                 preamble: jsPsych.timelineVariable('math_question_display'),
+                trial_duration: math_duration,
                 questions: [
                     {
                         name: 'math_answer',
-                        required: true,
+                        required: false,
                         columns: 20,
                         prompt: "Answer:",
                     },
                 ],
+                button_label: "Submit",
                 data: {
                     condition: jsPsych.timelineVariable('condition'),
                     math_question: jsPsych.timelineVariable('math_question'),
@@ -479,21 +566,41 @@
                 },
                 on_finish: function (data) {
                     var curr_progress_bar_value = jsPsych.getProgressBarCompleted();
-                    jsPsych.setProgressBar(curr_progress_bar_value + (1.0 / (3 * n_trials)));
+                    jsPsych.setProgressBar(curr_progress_bar_value + (1.0 / (4 * n_trials)));
+                    debug_print(data.response)
+                    if (jsPsych.pluginAPI.compareKeys(data.response.math_answer, data.math_correct_answer.toString())) {
+                        data.correct = true;
+                    } else {
+                        data.correct = false;
+                    }
                 },
                 save_trial_parameters: {
                     stimulus: false
                 }
             },
+            { // fixation (plus feedback on memory repeat response)
+                type: jsPsychHtmlKeyboardResponse,
+                stimulus: function () {
+                    var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+                    if (last_trial_correct) {
+                        return format_green("Correct"); // the parameter value has to be returned from the function
+                    } else {
+                        return format_red("Wrong"); // the parameter value has to be returned from the function
+                    }
+                },
+                choices: "NO_KEYS",
+                trial_duration: post_stimulus_delay,
+            },
             { // build a sentence
                 type: jsPsychSurveyText,
                 preamble: jsPsych.timelineVariable("stimulus2_display"),
+                trial_duration: build_sent_duration,
                 questions: [
                     {
                         name: 'produced_sentence',
-                        required: true,
+                        required: false,
                         columns: 20,
-                        prompt: "Write out the sentence from memory:",
+                        prompt: "Write out the sentence from memory (not case-sensitive):",
                     },
                 ],
                 data: {
@@ -509,12 +616,36 @@
                 },
                 on_finish: function (data) {
                     var curr_progress_bar_value = jsPsych.getProgressBarCompleted();
-                    jsPsych.setProgressBar(curr_progress_bar_value + (1.0 / (3 * n_trials)));
+                    jsPsych.setProgressBar(curr_progress_bar_value + (1.0 / (4 * n_trials)));
                 },
                 save_trial_parameters: {
                     stimulus: false
                 }
-            }
+            },
+            { // fixation (plus feedback on memory repeat response)
+                type: jsPsychHtmlKeyboardResponse,
+                stimulus: function () {
+                    var last_data = jsPsych.data.get().last(1).values()[0];
+                    var last_response = last_data.response["produced_sentence"].toLowerCase().replaceAll("[^a-zA-Z]+$", "");
+                    var last_answer1 = (last_data.subject + " " + last_data.verb + " " + last_data.pp1 + " " + last_data.pp2).toLowerCase();
+                    var last_answer2 = (last_data.subject + " " + last_data.verb + " " + last_data.pp2 + " " + last_data.pp1).toLowerCase();
+                    var edit_dist1 = editDistance(last_response, last_answer1);
+                    var edit_dist2 = editDistance(last_response, last_answer2);
+                    var edit_dist = Math.min(edit_dist1, edit_dist2);
+                    var score = Math.round(100.0 * (1 - (edit_dist / last_answer1.length)))
+                    var score = Math.max(0, score)
+                    var score = Math.min(100, score)
+                    if (score >= 80) {
+                        return format_green("Score: " + score)
+                    } else if (score >= 50) {
+                        return format_orange("Score: " + score)
+                    } else {
+                        return format_red("Score: " + score)
+                    }
+                },
+                choices: "NO_KEYS",
+                trial_duration: post_stimulus_delay,
+            },
         ],
         timeline_variables: sentence_mem_timeline_vars
     }

@@ -6,8 +6,11 @@ const stimulus_duration = 7000; // 7000
 const post_stimulus_delay = 1500; // 1500
 const fixation_duration = 500;
 const completion_code = "00000000";
+const math_duration = 5000;
+const build_sent_duration = 60000;
+
 const n_back_base = 20;
-const vigilance_repeat_back_range = [1, 7];
+const vigilance_repeat_back_range = [5, 15];
 const vigilance_frequency = 0.25;
 const repeat_list_shuffle_block_size = 2;
 const breaks_per_exp = 12;
@@ -52,6 +55,14 @@ function makeGrid(tl, tr, bl, br) {
         makeRect(400, 200, 10, 10, br)
 }
 
+function makeCueEn(verb) {
+    return '<span style="font-size:40px;">__________ ' + verb + ' ____________________</span>';
+}
+
+function makeCueJp(verb) {
+    return '<span style="font-size:40px;">______________________________ ' + verb + '</span>';
+}
+
 function makeMathQ(question) {
     return `<span style="font-size: 40px">${question}</span>`
 }
@@ -59,6 +70,57 @@ function makeMathQ(question) {
 // formatting function
 function format(s) {
     return '<span style="font-size:40px;">' + s + '</span>';
+}
+
+function format_red(s) {
+    return '<span style="font-size:40px;color:red">' + s + '</span>';
+}
+
+function format_green(s) {
+    return '<span style="font-size:40px;color:green">' + s + '</span>';
+}
+
+function format_orange(s) {
+    return '<span style="font-size:40px;color:orange">' + s + '</span>';
+}
+
+function editDistance(str1 = '', str2 = '') {
+    const track = Array(str2.length + 1).fill(null).map(() =>
+        Array(str1.length + 1).fill(null));
+    for (let i = 0; i <= str1.length; i += 1) {
+        track[0][i] = i;
+    }
+    for (let j = 0; j <= str2.length; j += 1) {
+        track[j][0] = j;
+    }
+    for (let j = 1; j <= str2.length; j += 1) {
+        for (let i = 1; i <= str1.length; i += 1) {
+            const indicator = str1[i - 1] === str2[j - 1] ? 0 : 1;
+            track[j][i] = Math.min(
+                track[j][i - 1] + 1, // deletion
+                track[j - 1][i] + 1, // insertion
+                track[j - 1][i - 1] + indicator, // substitution
+            );
+        }
+    }
+    return track[str2.length][str1.length];
+}
+
+function get_stats(a) {
+    var d = {};
+    for (var i = 0; i < a.length; i++) {
+        if (!(a[i].transitivity in d)) {
+            d[a[i].transitivity] = {}
+        }
+        if (!(a[i].modifier_position in d[a[i].transitivity])) {
+            d[a[i].transitivity][a[i].modifier_position] = {}
+        }
+        if (!(a[i].condition in d[a[i].transitivity][a[i].modifier_position])) {
+            d[a[i].transitivity][a[i].modifier_position][a[i].condition] = 0
+        }
+        d[a[i].transitivity][a[i].modifier_position][a[i].condition]++;
+    }
+    return d
 }
 
 // saving data
