@@ -6,8 +6,8 @@ const stimulus_duration = 7000; // 7000
 const post_stimulus_delay = 1500; // 1500
 const fixation_duration = 500;
 const completion_code = "00000000";
-const math_duration = 5000;
-const build_sent_duration = 60000;
+const math_duration = 7000;
+const build_sent_duration = 30000;
 
 const n_back_base = 20;
 const vigilance_repeat_back_range = [5, 15];
@@ -25,20 +25,22 @@ const task_instructions = [
     "Do NOT reload the page during the experiment, as this will cause you to lose your progress.</p>",
 
     "<p>TASK INSTRUCTIONS.</p> <p>It is important that you pay attention during this study. " +
-    "Please note that there are some trials where we expect everyone to be able to answer correctly. " +
-    "<b>If you don't answer most of these correctly, you will not get paid.</b></p>",
+    "During the study, you will be receiving feedback on the correctness of your responses. " +
+    "The tasks may be challenging and we don't expect perfect performance. " +
+    "<b>However, if you miss a large percentage of the tasks, you will not get paid.</b></p>",
 
     "<p>TASK INSTRUCTIONS.</p> <p>Once you complete the experiment, you will be shown your completion code. " +
     "Be careful not to accidentally exit the experiment before getting your completion code.</p>",
 
-    "<p>TASK INSTRUCTIONS.</p> <p>You will see a series of sentences, one on each screen. " +
-    "Press SPACE if you have seen the sentence before at <b>ANY</b> point during the study. " +
-    "You may press SPACE while the sentence is on the screen or during the waiting period after (when the + sign is on the screen).</p>",
+    "<p>TASK INSTRUCTIONS.</p> <p>The first screen in each trial will show a sentence broken into 4 parts, in scrambled order. " +
+    "Try to memorize this sentence. Press SPACE if you have seen the sentence before at <b>ANY</b> point during the study. " +
+    "On the next screen, you will be asked to solve a basic math problem. " +
+    "On the final screen of the trial, you will be asked to write the sentence that you saw previously from memory.</p>",
 
-    "<p>TASK INSTRUCTIONS.</p> <p>Pressing SPACE will make a chime noise. " +
-    "This is just to let you know that you've pressed SPACE, but the sound is unrelated to the correctness of your response.</p>",
+    "<p>TASK INSTRUCTIONS.</p> <p>Each screen in the trial has a time limit . " +
+    "7 seconds to memorize the scrambled sentence, 7 seconds for the math question, and 30 seconds to write out the sentence from memory.</p>",
 
-    "<p>TASK INSTRUCTIONS.</p> <p>You will now see a few practice examples. Remember: press SPACE if you see any repeated sentence. </p>",
+    "<p>TASK INSTRUCTIONS.</p> <p>You will now see a practice trial. </p>",
 ]
 
 function makeRect(w, h, x, y, text) {
@@ -82,6 +84,10 @@ function format_green(s) {
 
 function format_orange(s) {
     return '<span style="font-size:40px;color:orange">' + s + '</span>';
+}
+
+function standardize_whitespace(s) {
+    return s.replaceAll("\s", " ");
 }
 
 function editDistance(str1 = '', str2 = '') {

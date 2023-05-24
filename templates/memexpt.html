@@ -289,8 +289,10 @@
         type: jsPsychInstructions,
         pages: [
             "<p>Welcome. This is an experiment about language and memory.</p>",
-            makeGrid("this", "is", "a", "test"),
-            "This study is part of a MIT scientific research project. Your decision to complete this study is voluntary. Your responses are anonymous. The results of the research may be presented at scientific meetings or published in scientific journals. Clicking on the 'Next' button on the bottom of this page indicates that you are at least 18 years of age and agree to complete this study voluntarily."
+            "This study is part of a MIT scientific research project." +
+            "Your decision to complete this study is voluntary. Your responses are anonymous." +
+            "The results of the research may be presented at scientific meetings or published in scientific journals." +
+            "Clicking on the 'Next' button on the bottom of this page indicates that you are at least 18 years of age and agree to complete this study voluntarily."
         ],
         show_clickable_nav: true
     };
@@ -355,78 +357,250 @@
     };
     // timeline.push(instr);
 
+    // DEMO CONFIRMATION
+    var trial = {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: '<span style="font-size: 25px">You are now ready to start the demo. Press SPACE when you are ready to start.</span>',
+        choices: [" "]
+    };
+    timeline.push(trial);
+
     // DEMO SEQUENCE
-    var demo = [{
-        type: jsPsychHtmlKeyboardResponse,
-        stimulus: makeGrid("The box", "from the table", "to the floor", "fell"),
-        choices: [" ", "Spacebar"],
-        trial_duration: stimulus_duration,
-        response_ends_trial: false,
-    },
-    {
-        type: jsPsychSurveyText,
-        preamble: makeMathQ("5 + 7 = ?"),
-        questions: [
-            {
-                name: 'math_answer',
-                required: true,
-                columns: 20,
-                prompt: "Answer:",
+    var demo = [
+        { // first sentence presentation
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: makeGrid("The box", "from the table", "to the floor", "fell"),
+            prompt: "Press SPACE if this sentence has appeared before.",
+            choices: [' '],
+            trial_duration: stimulus_duration,
+            post_trial_gap: 0,
+            response_ends_trial: true,
+            data: {
+                repeat: false,
             },
-        ],
-        trial_duration: fixation_duration,
-        response_ends_trial: true,
-    },
-    {
-        type: jsPsychSurveyText,
-        preamble: makeGrid("", "", "", "fell"),
-        questions: [
-            {
-                name: 'produced_sentence',
-                required: true,
-                columns: 20,
-                prompt: "Write out the sentence from memory:",
+            on_finish: function (data) {
+                if (jsPsych.pluginAPI.compareKeys(data.response, " ") && data.repeat) {
+                    data.correct = true;
+                } else if (data.response == null && data.repeat == false) {
+                    data.correct = true;
+                } else {
+                    data.correct = false;
+                }
             },
-        ],
-        trial_duration: stimulus_duration,
-        response_ends_trial: true,
-    },
-    {
-        type: jsPsychHtmlKeyboardResponse,
-        stimulus: makeGrid("The teacher", "with the child", "about the project", "spoke"),
-        choices: [" ", "Spacebar"],
-        trial_duration: stimulus_duration,
-        response_ends_trial: false,
-    },
-    {
-        type: jsPsychSurveyText,
-        preamble: makeMathQ("12 - 7 = ?"),
-        questions: [
-            {
-                name: 'math_answer',
-                required: true,
-                columns: 20,
-                prompt: "Answer:",
+            save_trial_parameters: {
+                stimulus: false
+            }
+        },
+        { // first repeat memory feedback
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: function () {
+                var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+                if (last_trial_correct) {
+                    return format_green("Correct"); // the parameter value has to be returned from the function
+                } else {
+                    return format_red("Wrong"); // the parameter value has to be returned from the function
+                }
             },
-        ],
-        trial_duration: fixation_duration,
-        response_ends_trial: true,
-    },
-    {
-        type: jsPsychSurveyText,
-        preamble: makeGrid("", "", "", "fell"),
-        questions: [
-            {
-                name: 'produced_sentence',
-                required: true,
-                columns: 20,
-                prompt: "Write out the sentence from memory:",
+            choices: "NO_KEYS",
+            trial_duration: post_stimulus_delay,
+        },
+        { // first math question
+            type: jsPsychSurveyText,
+            preamble: makeMathQ("5 + 7 = ?"),
+            questions: [
+                {
+                    name: 'math_answer',
+                    required: true,
+                    columns: 20,
+                    prompt: "Answer:",
+                },
+            ],
+            data: {
+                math_correct_answer: 12,
             },
-        ],
-        trial_duration: stimulus_duration,
-        response_ends_trial: true,
-    },];
-    // timeline.push(...demo);
+            trial_duration: fixation_duration,
+            response_ends_trial: true,
+            on_finish: function (data) {
+                debug_print(data.response)
+                if (jsPsych.pluginAPI.compareKeys(data.response.math_answer, data.math_correct_answer.toString())) {
+                    data.correct = true;
+                } else {
+                    data.correct = false;
+                }
+            },
+            save_trial_parameters: {
+                stimulus: false
+            }
+        },
+        { // first feedback on math response
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: function () {
+                var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+                if (last_trial_correct) {
+                    return format_green("Correct"); // the parameter value has to be returned from the function
+                } else {
+                    return format_red("Wrong"); // the parameter value has to be returned from the function
+                }
+            },
+            choices: "NO_KEYS",
+            trial_duration: post_stimulus_delay,
+        },
+        { // first sentence recall task
+            type: jsPsychSurveyText,
+            preamble: makeCueEn("fell"),
+            trial_duration: build_sent_duration,
+            questions: [
+                {
+                    name: 'produced_sentence',
+                    required: false,
+                    columns: 20,
+                    prompt: "Write out the sentence from memory (not case-sensitive):",
+                },
+            ],
+            response_ends_trial: true,
+        },
+        { // first sentence recall feedback
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: function () {
+                var last_data = jsPsych.data.get().last(1).values()[0];
+                var last_response = last_data.response["produced_sentence"].toLowerCase().replaceAll("[^a-zA-Z]+$", "");
+                var last_answer1 = standardize_whitespace("The box fell from the table to the floor").toLowerCase();
+                var last_answer2 = standardize_whitespace("The box fell to the floor from the table").toLowerCase();
+                var edit_dist1 = editDistance(last_response, last_answer1);
+                var edit_dist2 = editDistance(last_response, last_answer2);
+                var edit_dist = Math.min(edit_dist1, edit_dist2);
+                var score = Math.round(100.0 * (1 - (edit_dist / last_answer1.length)))
+                var score = Math.max(0, score)
+                var score = Math.min(100, score)
+                if (score >= 80) {
+                    return format_green("Score: " + score)
+                } else if (score >= 50) {
+                    return format_orange("Score: " + score)
+                } else {
+                    return format_red("Score: " + score)
+                }
+            },
+            choices: "NO_KEYS",
+            trial_duration: post_stimulus_delay,
+        },
+        { // second sentence presentation
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: makeGrid("The teacher", "with the child", "about the project", "spoke"),
+            prompt: "Press SPACE if this sentence has appeared before.",
+            choices: [' '],
+            trial_duration: stimulus_duration,
+            post_trial_gap: 0,
+            response_ends_trial: true,
+            data: {
+                repeat: false,
+            },
+            on_finish: function (data) {
+                if (jsPsych.pluginAPI.compareKeys(data.response, " ") && data.repeat) {
+                    data.correct = true;
+                } else if (data.response == null && data.repeat == false) {
+                    data.correct = true;
+                } else {
+                    data.correct = false;
+                }
+            },
+            save_trial_parameters: {
+                stimulus: false
+            }
+        },
+        { // second repeat memory feedback
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: function () {
+                var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+                if (last_trial_correct) {
+                    return format_green("Correct"); // the parameter value has to be returned from the function
+                } else {
+                    return format_red("Wrong"); // the parameter value has to be returned from the function
+                }
+            },
+            choices: "NO_KEYS",
+            trial_duration: post_stimulus_delay,
+        },
+        { // second math question
+            type: jsPsychSurveyText,
+            preamble: makeMathQ("12 + 7 = ?"),
+            questions: [
+                {
+                    name: 'math_answer',
+                    required: true,
+                    columns: 20,
+                    prompt: "Answer:",
+                },
+            ],
+            data: {
+                math_correct_answer: 19,
+            },
+            trial_duration: fixation_duration,
+            response_ends_trial: true,
+            on_finish: function (data) {
+                debug_print(data.response)
+                if (jsPsych.pluginAPI.compareKeys(data.response.math_answer, data.math_correct_answer.toString())) {
+                    data.correct = true;
+                } else {
+                    data.correct = false;
+                }
+            },
+            save_trial_parameters: {
+                stimulus: false
+            }
+        },
+        { // second feedback on math question
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: function () {
+                var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+                if (last_trial_correct) {
+                    return format_green("Correct"); // the parameter value has to be returned from the function
+                } else {
+                    return format_red("Wrong"); // the parameter value has to be returned from the function
+                }
+            },
+            choices: "NO_KEYS",
+            trial_duration: post_stimulus_delay,
+        },
+        { // second sentence recall
+            type: jsPsychSurveyText,
+            preamble: makeCueEn("spoke"),
+            trial_duration: build_sent_duration,
+            questions: [
+                {
+                    name: 'produced_sentence',
+                    required: false,
+                    columns: 20,
+                    prompt: "Write out the sentence from memory (not case-sensitive):",
+                },
+            ],
+            response_ends_trial: true,
+        },
+        { // second sentence recall feedback
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: function () {
+                var last_data = jsPsych.data.get().last(1).values()[0];
+                var last_response = last_data.response["produced_sentence"].toLowerCase().replaceAll("[^a-zA-Z]+$", "");
+                var last_answer1 = standardize_whitespace("The teacher spoke with the child about the project").toLowerCase();
+                var last_answer2 = standardize_whitespace("The teacher spoke about the project with the child").toLowerCase();
+                var edit_dist1 = editDistance(last_response, last_answer1);
+                var edit_dist2 = editDistance(last_response, last_answer2);
+                var edit_dist = Math.min(edit_dist1, edit_dist2);
+                var score = Math.round(100.0 * (1 - (edit_dist / last_answer1.length)))
+                var score = Math.max(0, score)
+                var score = Math.min(100, score)
+                if (score >= 80) {
+                    return format_green("Score: " + score)
+                } else if (score >= 50) {
+                    return format_orange("Score: " + score)
+                } else {
+                    return format_red("Score: " + score)
+                }
+            },
+            choices: "NO_KEYS",
+            trial_duration: post_stimulus_delay,
+        },
+    ];
+    timeline.push(...demo);
 
     // FINAL CONFIRMATION SCREEN
     var trial = {
@@ -627,8 +801,8 @@
                 stimulus: function () {
                     var last_data = jsPsych.data.get().last(1).values()[0];
                     var last_response = last_data.response["produced_sentence"].toLowerCase().replaceAll("[^a-zA-Z]+$", "");
-                    var last_answer1 = (last_data.subject + " " + last_data.verb + " " + last_data.pp1 + " " + last_data.pp2).toLowerCase();
-                    var last_answer2 = (last_data.subject + " " + last_data.verb + " " + last_data.pp2 + " " + last_data.pp1).toLowerCase();
+                    var last_answer1 = standardize_whitespace(last_data.subject + " " + last_data.verb + " " + last_data.pp1 + " " + last_data.pp2).toLowerCase();
+                    var last_answer2 = standardize_whitespace(last_data.subject + " " + last_data.verb + " " + last_data.pp2 + " " + last_data.pp1).toLowerCase();
                     var edit_dist1 = editDistance(last_response, last_answer1);
                     var edit_dist2 = editDistance(last_response, last_answer2);
                     var edit_dist = Math.min(edit_dist1, edit_dist2);
