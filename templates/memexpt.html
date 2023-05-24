@@ -121,7 +121,14 @@
             }
 
             var grid = null;
-            var grid_inputs = [a[i].Subject, a[i].PP1, a[i].PP2, a[i].Verb];
+            var grid_inputs = null;
+
+            var pp1_top_right = Math.random() < 0.5;
+            if (pp1_top_right) {
+                grid_inputs = [a[i].Subject, a[i].PP1, a[i].PP2, a[i].Verb];
+            } else {
+                grid_inputs = [a[i].Subject, a[i].PP2, a[i].PP1, a[i].Verb];
+            }
 
             if (a[i].Filler) {
                 grid_inputs = jsPsych.randomization.repeat(grid_inputs, 1)
@@ -133,6 +140,7 @@
                 verb: a[i].Verb,
                 pp1: a[i].PP1,
                 pp2: a[i].PP2,
+                pp1_top_right: pp1_top_right,
                 repeat: false,
                 filler: a[i].Filler,
                 math_question: a[i].math_question,
@@ -681,8 +689,10 @@
                     pp1: jsPsych.timelineVariable("pp1"),
                     pp2: jsPsych.timelineVariable("pp2"),
                     repeat: jsPsych.timelineVariable("repeat"),
+                    pp1_top_right: jsPsych.timelineVariable("pp1_top_right"),
                 },
                 on_finish: function (data) {
+                    debug_print(data)
                     var curr_progress_bar_value = jsPsych.getProgressBarCompleted();
                     jsPsych.setProgressBar(curr_progress_bar_value + (1.0 / (4 * n_trials)));
                     if (jsPsych.pluginAPI.compareKeys(data.response, " ") && data.repeat) {
@@ -737,6 +747,7 @@
                     verb: jsPsych.timelineVariable("verb"),
                     pp1: jsPsych.timelineVariable("pp1"),
                     pp2: jsPsych.timelineVariable("pp2"),
+                    pp1_top_right: jsPsych.timelineVariable("pp1_top_right"),
                 },
                 on_finish: function (data) {
                     var curr_progress_bar_value = jsPsych.getProgressBarCompleted();
@@ -787,6 +798,7 @@
                     verb: jsPsych.timelineVariable("verb"),
                     pp1: jsPsych.timelineVariable("pp1"),
                     pp2: jsPsych.timelineVariable("pp2"),
+                    pp1_top_right: jsPsych.timelineVariable("pp1_top_right"),
                 },
                 on_finish: function (data) {
                     var curr_progress_bar_value = jsPsych.getProgressBarCompleted();
@@ -800,9 +812,12 @@
                 type: jsPsychHtmlKeyboardResponse,
                 stimulus: function () {
                     var last_data = jsPsych.data.get().last(1).values()[0];
-                    var last_response = last_data.response["produced_sentence"].toLowerCase().replaceAll("[^a-zA-Z]+$", "");
+                    var last_response = standardize_whitespace(last_data.response["produced_sentence"].toLowerCase().replaceAll("[^a-zA-Z]+$", ""));
                     var last_answer1 = standardize_whitespace(last_data.subject + " " + last_data.verb + " " + last_data.pp1 + " " + last_data.pp2).toLowerCase();
                     var last_answer2 = standardize_whitespace(last_data.subject + " " + last_data.verb + " " + last_data.pp2 + " " + last_data.pp1).toLowerCase();
+                    debug_print(last_response)
+                    debug_print(last_answer1)
+                    debug_print(last_answer1)
                     var edit_dist1 = editDistance(last_response, last_answer1);
                     var edit_dist2 = editDistance(last_response, last_answer2);
                     var edit_dist = Math.min(edit_dist1, edit_dist2);

@@ -3,7 +3,7 @@
 const use_flask = false;
 const trials_per_block = 85; // 85;
 const stimulus_duration = 7000; // 7000
-const post_stimulus_delay = 1500; // 1500
+const post_stimulus_delay = 1000; // 1500
 const fixation_duration = 500;
 const completion_code = "00000000";
 const math_duration = 7000;
@@ -87,7 +87,7 @@ function format_orange(s) {
 }
 
 function standardize_whitespace(s) {
-    return s.replaceAll("\s", " ");
+    return s.replaceAll("/\s/", " ");
 }
 
 function editDistance(str1 = '', str2 = '') {
