@@ -125,15 +125,16 @@
 
             var pp1_top_right = Math.random() < 0.5;
             if (pp1_top_right) {
-                grid_inputs = [a[i].Subject, a[i].PP1, a[i].PP2, a[i].Verb];
+                grid_inputs = [render_newline(a[i].Subject), render_newline(a[i].PP1), render_newline(a[i].PP2), render_newline(a[i].Verb)];
             } else {
-                grid_inputs = [a[i].Subject, a[i].PP2, a[i].PP1, a[i].Verb];
+                grid_inputs = [render_newline(a[i].Subject), render_newline(a[i].PP2), render_newline(a[i].PP1), render_newline(a[i].Verb)];
             }
 
             if (a[i].Filler) {
                 grid_inputs = jsPsych.randomization.repeat(grid_inputs, 1)
             }
             grid = makeGrid(...grid_inputs)
+            debug_print(grid)
 
             seq.push({
                 subject: a[i].Subject,
@@ -368,7 +369,7 @@
     // DEMO CONFIRMATION
     var trial = {
         type: jsPsychHtmlKeyboardResponse,
-        stimulus: '<span style="font-size: 25px">You are now ready to start the demo. Press SPACE when you are ready to start.</span>',
+        stimulus: '<span style="font-size: 25px">You are now ready to start the demo. Press the SPACE bar when you are ready to start.</span>',
         choices: [" "]
     };
     timeline.push(trial);
@@ -378,7 +379,7 @@
         { // first sentence presentation
             type: jsPsychHtmlKeyboardResponse,
             stimulus: makeGrid("The box", "from the table", "to the floor", "fell"),
-            prompt: "Press SPACE if this sentence has appeared before.",
+            prompt: "Press the SPACE bar if this sentence has appeared before.",
             choices: [' '],
             trial_duration: stimulus_duration,
             post_trial_gap: 0,
@@ -418,7 +419,7 @@
             questions: [
                 {
                     name: 'math_answer',
-                    required: true,
+                    required: false,
                     columns: 20,
                     prompt: "Answer:",
                 },
@@ -426,7 +427,7 @@
             data: {
                 math_correct_answer: 12,
             },
-            trial_duration: fixation_duration,
+            trial_duration: math_duration,
             response_ends_trial: true,
             on_finish: function (data) {
                 debug_print(data.response)
@@ -494,7 +495,7 @@
         { // second sentence presentation
             type: jsPsychHtmlKeyboardResponse,
             stimulus: makeGrid("The teacher", "with the child", "about the project", "spoke"),
-            prompt: "Press SPACE if this sentence has appeared before.",
+            prompt: "Press the SPACE bar if this sentence has appeared before.",
             choices: [' '],
             trial_duration: stimulus_duration,
             post_trial_gap: 0,
@@ -534,7 +535,7 @@
             questions: [
                 {
                     name: 'math_answer',
-                    required: true,
+                    required: false,
                     columns: 20,
                     prompt: "Answer:",
                 },
@@ -542,7 +543,7 @@
             data: {
                 math_correct_answer: 19,
             },
-            trial_duration: fixation_duration,
+            trial_duration: math_duration,
             response_ends_trial: true,
             on_finish: function (data) {
                 debug_print(data.response)
@@ -613,7 +614,7 @@
     // FINAL CONFIRMATION SCREEN
     var trial = {
         type: jsPsychHtmlKeyboardResponse,
-        stimulus: '<span style="font-size: 25px">You are now ready to start the experiment. Press SPACE when you are ready to start.</span>',
+        stimulus: '<span style="font-size: 25px">You are now ready to start the experiment. Press the SPACE bar when you are ready to start.</span>',
         choices: [" ", "Spacebar"]
     };
     timeline.push(trial);
@@ -673,7 +674,7 @@
             { // show sentence parts
                 type: jsPsychHtmlKeyboardResponse,
                 stimulus: jsPsych.timelineVariable("stimulus_display"),
-                prompt: "Press SPACE if this sentence has appeared before.",
+                prompt: "Press the SPACE bar if this sentence has appeared before.",
                 choices: [' '],
                 trial_duration: stimulus_duration,
                 post_trial_gap: 0,

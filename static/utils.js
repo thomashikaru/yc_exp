@@ -2,11 +2,11 @@
 // change the following prior to real experiment: trials_per_block, debug_mode, completion_code
 const use_flask = false;
 const trials_per_block = 85; // 85;
-const stimulus_duration = 7000; // 7000
-const post_stimulus_delay = 1000; // 1500
+const stimulus_duration = 10000; // 7000
+const post_stimulus_delay = 750; // 1500
 const fixation_duration = 500;
 const completion_code = "00000000";
-const math_duration = 7000;
+const math_duration = 10000;
 const build_sent_duration = 30000;
 
 const n_back_base = 20;
@@ -44,17 +44,24 @@ const task_instructions = [
 ]
 
 function makeRect(w, h, x, y, text) {
-    return `<svg width="${w + 2 * x}" height="${h + 2 * y}">` +
+    var l = `<svg width="${w + 2 * x}" height="${h + 2 * y}">` +
         `<g><rect x="${x}" y="${y}" width="${w}" height="${h}" style="fill:white;stroke:black;stroke-width:5;fill-opacity:0.0;stroke-opacity:1.0"/>` +
-        `<text x="${2 * x}" y="${h / 3}" font-family="Verdana" font-size="28" fill="black" style="white-space: pre-line">${text}</text></g></svg>`
+        `<text x="${2 * x}" y="${h / 3}" font-family="Verdana" font-size="28" fill="black" style="white-space: pre-line">`
+    var t = ""
+    var chunks = text.split("\n")
+    for (var i = 0; i < chunks.length; i++) {
+        t += `<tspan x="${2 * x}" dy="1.2em">${chunks[i]}</tspan>`
+    }
+    var r = `</text></g></svg>`
+    return l + t + r
 }
 
 function makeGrid(tl, tr, bl, br) {
-    return makeRect(400, 200, 10, 10, tl) +
+    return "<div>" + makeRect(400, 200, 10, 10, tl) +
         makeRect(400, 200, 10, 10, tr) +
-        "<div>" +
+        "</div><div>" +
         makeRect(400, 200, 10, 10, bl) +
-        makeRect(400, 200, 10, 10, br)
+        makeRect(400, 200, 10, 10, br) + "</div>"
 }
 
 function makeCueEn(verb) {
@@ -88,6 +95,11 @@ function format_orange(s) {
 
 function standardize_whitespace(s) {
     return s.replaceAll("/\s/", " ");
+}
+
+function render_newline(s) {
+    return s
+    return s.split("\n").join("<br/>");
 }
 
 function editDistance(str1 = '', str2 = '') {
