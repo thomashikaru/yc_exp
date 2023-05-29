@@ -382,7 +382,7 @@
         { // first sentence presentation
             type: jsPsychHtmlKeyboardResponse,
             stimulus: makeGrid("The box", "from the table", "to the floor", "fell"),
-            prompt: "Press the SPACE bar if this sentence has appeared before.",
+            prompt: '<span style="font-size: 25px">Press the SPACE bar if this sentence has appeared before.</span>',
             choices: [' '],
             trial_duration: stimulus_duration,
             post_trial_gap: 0,
@@ -498,7 +498,7 @@
         { // second sentence presentation
             type: jsPsychHtmlKeyboardResponse,
             stimulus: makeGrid("The teacher", "with the child", "about the project", "spoke"),
-            prompt: "Press the SPACE bar if this sentence has appeared before.",
+            prompt: '<span style="font-size: 25px">Press the SPACE bar if this sentence has appeared before.</span>',
             choices: [' '],
             trial_duration: stimulus_duration,
             post_trial_gap: 0,
@@ -677,7 +677,7 @@
             { // show sentence parts
                 type: jsPsychHtmlKeyboardResponse,
                 stimulus: jsPsych.timelineVariable("stimulus_display"),
-                prompt: "Press the SPACE bar if this sentence has appeared before.",
+                prompt: '<span style="font-size: 25px">Press the SPACE bar if this sentence has appeared before.</span>',
                 choices: [' '],
                 trial_duration: stimulus_duration,
                 post_trial_gap: 0,
