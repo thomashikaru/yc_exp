@@ -16,18 +16,18 @@ const repeat_list_shuffle_block_size = 2;
 const breaks_per_exp = 12;
 const break_max_len = 180;
 const num_lists = 12;
-const debug_mode = true;
+const debug_mode = false;
 
 // instructions
 const task_instructions = [
-    "<p>TASK INSTRUCTIONS.</p> <p>This experiment should take around X minutes. " +
+    "<p>TASK INSTRUCTIONS.</p> <p>This experiment should take around 30 minutes. " +
     "The progress bar at the top of the screen will indicate your progress in the experiment. " +
     "Do NOT reload the page during the experiment, as this will cause you to lose your progress.</p>",
 
     "<p>TASK INSTRUCTIONS.</p> <p>It is important that you pay attention during this study. " +
     "During the study, you will be receiving feedback on the correctness of your responses. " +
     "The tasks may be challenging and we don't expect perfect performance. " +
-    "<b>However, if you miss a large percentage of the tasks, you will not get paid.</b></p>",
+    "<b>However, if your results reflect an obvious lack of attention, you will not get paid.</b></p>",
 
     "<p>TASK INSTRUCTIONS.</p> <p>Once you complete the experiment, you will be shown your completion code. " +
     "Be careful not to accidentally exit the experiment before getting your completion code.</p>",
@@ -37,8 +37,9 @@ const task_instructions = [
     "On the next screen, you will be asked to solve a basic math problem. " +
     "On the final screen of the trial, you will be asked to write the sentence that you saw previously from memory.</p>",
 
-    "<p>TASK INSTRUCTIONS.</p> <p>Each screen in the trial has a time limit . " +
-    "7 seconds to memorize the scrambled sentence, 7 seconds for the math question, and 30 seconds to write out the sentence from memory.</p>",
+    "<p>TASK INSTRUCTIONS.</p> <p>Each screen in the trial has a time limit. " +
+    "10 seconds to memorize the scrambled sentence, 10 seconds for the math question, and 30 seconds to write out the sentence from memory. " +
+    "You do not have to use the full time for each question. <b>Again, we don't expect perfect performance, but please do your best.</b> </p>",
 
     "<p>TASK INSTRUCTIONS.</p> <p>You will now see a practice trial. </p>",
 ]
@@ -100,6 +101,19 @@ function standardize_whitespace(s) {
 function render_newline(s) {
     return s
     return s.split("\n").join("<br/>");
+}
+
+function display_score_feedback(score) {
+    if (score == 100) {
+        return format_green("Perfect")
+    }
+    else if (score >= 95) {
+        return format_green("Very Good")
+    } else if (score >= 90) {
+        return format_orange("Good")
+    } else {
+        return format_red("Poor")
+    }
 }
 
 function editDistance(str1 = '', str2 = '') {

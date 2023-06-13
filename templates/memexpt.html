@@ -308,7 +308,7 @@
         ],
         show_clickable_nav: true
     };
-    // timeline.push(instr);
+    timeline.push(instr);
 
     // QUESTIONNAIRE 
     var trial = {
@@ -340,7 +340,7 @@
         ],
         randomize_question_order: false
     };
-    // timeline.push(trial);
+    timeline.push(trial);
 
     var trial = {
         type: jsPsychSurveyText,
@@ -359,7 +359,7 @@
             }
         ]
     }
-    // timeline.push(trial);
+    timeline.push(trial);
 
     // INSTRUCTIONS (instructions can be edited in utils.js)
     var instr = {
@@ -367,7 +367,7 @@
         pages: task_instructions,
         show_clickable_nav: true
     };
-    // timeline.push(instr);
+    timeline.push(instr);
 
     // DEMO CONFIRMATION
     var trial = {
@@ -484,13 +484,7 @@
                 var score = Math.round(100.0 * (1 - (edit_dist / last_answer1.length)))
                 var score = Math.max(0, score)
                 var score = Math.min(100, score)
-                if (score >= 80) {
-                    return format_green("Score: " + score)
-                } else if (score >= 50) {
-                    return format_orange("Score: " + score)
-                } else {
-                    return format_red("Score: " + score)
-                }
+                return display_score_feedback(score)
             },
             choices: "NO_KEYS",
             trial_duration: post_stimulus_delay,
@@ -600,13 +594,7 @@
                 var score = Math.round(100.0 * (1 - (edit_dist / last_answer1.length)))
                 var score = Math.max(0, score)
                 var score = Math.min(100, score)
-                if (score >= 80) {
-                    return format_green("Score: " + score)
-                } else if (score >= 50) {
-                    return format_orange("Score: " + score)
-                } else {
-                    return format_red("Score: " + score)
-                }
+                return display_score_feedback(score)
             },
             choices: "NO_KEYS",
             trial_duration: post_stimulus_delay,
@@ -828,13 +816,7 @@
                     var score = Math.round(100.0 * (1 - (edit_dist / last_answer1.length)))
                     var score = Math.max(0, score)
                     var score = Math.min(100, score)
-                    if (score >= 80) {
-                        return format_green("Score: " + score)
-                    } else if (score >= 50) {
-                        return format_orange("Score: " + score)
-                    } else {
-                        return format_red("Score: " + score)
-                    }
+                    return display_score_feedback(score)
                 },
                 choices: "NO_KEYS",
                 trial_duration: post_stimulus_delay,
