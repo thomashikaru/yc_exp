@@ -6,7 +6,7 @@ $post_data = json_decode(file_get_contents('php://input'), true);
 $data = $post_data['filedata'];
 $name = $post_data['filename'];
 // the directory must be writable by the server
-$fname = "../results/{$name}.csv"; 
+$fname = "/mit/thclark/Private/yc_results/{$name}.csv"; 
 // write the file to disk
 file_put_contents($fname, $data);
 // echo($fname)

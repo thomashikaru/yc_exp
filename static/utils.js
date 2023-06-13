@@ -16,7 +16,7 @@ const repeat_list_shuffle_block_size = 2;
 const breaks_per_exp = 12;
 const break_max_len = 180;
 const num_lists = 12;
-const debug_mode = false;
+const debug_mode = true;
 
 // instructions
 const task_instructions = [

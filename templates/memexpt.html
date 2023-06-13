@@ -308,7 +308,9 @@
         ],
         show_clickable_nav: true
     };
-    timeline.push(instr);
+    if (!debug_mode) {
+        timeline.push(instr);
+    }
 
     // QUESTIONNAIRE 
     var trial = {
@@ -340,8 +342,9 @@
         ],
         randomize_question_order: false
     };
-    timeline.push(trial);
-
+    if (!debug_mode) {
+        timeline.push(trial);
+    }
     var trial = {
         type: jsPsychSurveyText,
         questions: [
@@ -359,7 +362,9 @@
             }
         ]
     }
-    timeline.push(trial);
+    if (!debug_mode) {
+        timeline.push(trial);
+    }
 
     // INSTRUCTIONS (instructions can be edited in utils.js)
     var instr = {
@@ -367,7 +372,9 @@
         pages: task_instructions,
         show_clickable_nav: true
     };
-    timeline.push(instr);
+    if (!debug_mode) {
+        timeline.push(instr);
+    }
 
     // DEMO CONFIRMATION
     var trial = {
@@ -375,7 +382,9 @@
         stimulus: '<span style="font-size: 25px">You are now ready to start the demo. Press the SPACE bar when you are ready to start.</span>',
         choices: [" "]
     };
-    timeline.push(trial);
+    if (!debug_mode) {
+        timeline.push(trial);
+    }
 
     // DEMO SEQUENCE
     var demo = [
@@ -600,7 +609,9 @@
             trial_duration: post_stimulus_delay,
         },
     ];
-    timeline.push(...demo);
+    if (!debug_mode) {
+        timeline.push(...demo);
+    }
 
     // FINAL CONFIRMATION SCREEN
     var trial = {
@@ -608,7 +619,9 @@
         stimulus: '<span style="font-size: 25px">You are now ready to start the experiment. Press the SPACE bar when you are ready to start.</span>',
         choices: [" ", "Spacebar"]
     };
-    timeline.push(trial);
+    if (!debug_mode) {
+        timeline.push(trial);
+    }
 
     // create conditional break page that shows up at regular intervals
     var trial_count = 0;
