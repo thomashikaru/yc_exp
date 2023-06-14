@@ -161,7 +161,7 @@ function saveData(name, data) {
     if (use_flask) {
         xhr.open('POST', "{{url_for('save')}}");
     } else {
-        xhr.open('POST', "/mit/thclark/web_scripts/write_data.php");
+        xhr.open('POST', "thclark.scripts.mit.edu/write_data.php");
     }
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({ filename: name, filedata: data }));
