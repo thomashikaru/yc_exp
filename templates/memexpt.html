@@ -41,10 +41,12 @@
         show_progress_bar: true,
         auto_update_progress_bar: false,
         on_close: function () {
-            saveData(participant_id, jsPsych.data.get().csv());
+            // saveData(participant_id, jsPsych.data.get().csv());
+            return JSON.parse(jsPsych.data.get().json());
         },
         on_finish: function () {
-            console.log("Experiment Completed.");
+            // console.log("Experiment Completed.");
+            return JSON.parse(jsPsych.data.get().json());
         },
         override_safe_mode: false,
     });
@@ -382,9 +384,7 @@
         stimulus: '<span style="font-size: 25px">You are now ready to start the demo. Press the SPACE bar when you are ready to start.</span>',
         choices: [" "]
     };
-    if (!debug_mode) {
-        timeline.push(trial);
-    }
+    timeline.push(trial);
 
     // DEMO SEQUENCE
     var demo = [
@@ -498,6 +498,7 @@
             choices: "NO_KEYS",
             trial_duration: post_stimulus_delay,
             on_finish: function () {
+                console.log(JSON.parse(jsPsych.data.get().json()));
                 saveData(participant_id, jsPsych.data.get().csv());
             }
         },
@@ -612,9 +613,7 @@
             trial_duration: post_stimulus_delay,
         },
     ];
-    if (!debug_mode) {
-        timeline.push(...demo);
-    }
+    timeline.push(...demo);
 
     // FINAL CONFIRMATION SCREEN
     var trial = {
