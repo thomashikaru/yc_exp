@@ -497,6 +497,9 @@
             },
             choices: "NO_KEYS",
             trial_duration: post_stimulus_delay,
+            on_finish: function () {
+                saveData(participant_id, jsPsych.data.get().csv());
+            }
         },
         { // second sentence presentation
             type: jsPsychHtmlKeyboardResponse,
